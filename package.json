@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R spec"
   },
   "repository": "git@github.com:dimerica-industries/node-cql-builder.git",
   "author": "Isao Jonas <isao@dimerica-industries.com>",
