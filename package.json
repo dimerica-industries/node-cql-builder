@@ -15,5 +15,11 @@
   "dependencies": {
     "dot": "~1.0.1"
   },
-  "keywords": ["cql", "cassandra"]
+  "keywords": [
+    "cql",
+    "cassandra"
+  ],
+  "devDependencies": {
+    "mocha": "~1.8.1"
+  }
 }
