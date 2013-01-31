@@ -1,18 +1,19 @@
 {
   "name": "cql-builder",
-  "version": "0.0.0",
-  "description": "ERROR: No README.md file found!",
+  "version": "0.0.1",
+  "description": "CQL query builder",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
-  "repository": "",
-  "author": "",
-  "license": "BSD",
+  "repository": "git@github.com:dimerica-industries/node-cql-builder.git",
+  "author": "Isao Jonas <isao@dimerica-industries.com>",
+  "license": "MIT",
   "dependencies": {
     "dot": "~1.0.1"
-  }
+  },
+  "keywords": ["cql", "cassandra"]
 }
