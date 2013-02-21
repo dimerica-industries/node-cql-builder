@@ -141,6 +141,14 @@ describe('symbols', function()
 			eq(symbol.SetLiteral(val), '{3, 4, 5, 6}');
 		});
 	});
+
+	describe('native type', function()
+	{
+		it('should accept types', function()
+		{
+			eq(symbol.NativeType('int'), 'int');
+		});
+	});
 });
 
 function test_string_accept(op)
