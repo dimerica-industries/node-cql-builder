@@ -84,4 +84,25 @@ describe('statements', function()
 			.end(),
 			"CREATE TABLE \"monkeySpecies\" (\"species\" text, \"common_name\" text, \"population\" varint, \"average_size\" int, PRIMARY KEY (\"species\")) WITH \"comment\" = 'Important biological records' AND \"read_repair_chance\" = 1.0");
 	});
+
+	it('alter table', function()
+	{
+		eq(query.AlterTable()
+			.table({table: 'addamsFamily'})
+			.instruction({column: "lastKnownLocation", type: "uuid"}),
+		"ALTER TABLE \"addamsFamily\" ALTER \"lastKnownLocation\" TYPE uuid");
+
+		eq(query.AlterTable()
+			.table({table: 'addamsFamily'})
+			.instructionAlterInstructionAdd({column: "gravesite", type: "varchar"}),
+		"ALTER TABLE \"addamsFamily\" ADD \"gravesite\" varchar");
+
+		eq(query.AlterTable()
+			.table({table: 'addamsFamily'})
+			.instructionAlterInstructionWith().options()
+				.value({key: 'comment', value: "A most excellent and useful column family"})
+				.value({key: 'read_repair_chance', value: '0.2'})
+			.end().end(),
+		"ALTER TABLE \"addamsFamily\" WITH \"comment\" = 'A most excellent and useful column family' AND \"read_repair_chance\" = 0.2");
+	});
 });
