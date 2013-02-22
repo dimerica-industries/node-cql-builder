@@ -162,7 +162,7 @@ describe('statements', function()
 
 		eq(query.Update()
 			.table({table: "UserActions"})
-			.set({column: 'total', plus: 2})
+			.set({column: 'total', add: 2})
 			.where({column: 'user', value: 'B70DE1D0-9908-4AE3-BE34-5573E5B09F14'}, {column: 'action', value: 'click'}),
 			"UPDATE \"UserActions\" SET \"total\" = \"total\" + 2 WHERE \"user\" = B70DE1D0-9908-4AE3-BE34-5573E5B09F14 AND \"action\" = 'click';");
 	});
