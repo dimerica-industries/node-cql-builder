@@ -6,7 +6,7 @@ function eq(from, to)
 	return assert.deepEqual(from.toString(), to);
 }
 
-describe('symbols', function()
+describe('symbols:', function()
 {
 	describe('identifier', function()
 	{
@@ -70,12 +70,6 @@ describe('symbols', function()
 		reject('uuid', 'null', 'undefined', 'boolean', 'object', 'string', 'integer', 'float');
 	});
 
-	describe('final-term', function()
-	{
-		test_ft_accept('FinalTerm')();
-		reject('final-term', 'null', 'undefined', 'object');
-	});
-
 	describe('term', function()
 	{
 		test_ft_accept('Term')();
@@ -92,23 +86,23 @@ describe('symbols', function()
 		reject('term', 'null', 'undefined', 'object', 'string', 'boolean', 'float');
 	});
 
-	describe('final-term-pair', function()
+	describe('map-terms', function()
 	{
 		it('should accept key, value pair', function()
 		{
-			eq(symbol.FinalTermPair(
+			eq(symbol.MapTerms(
 				{key: 'hello', value: 'goodbye'}), 
 				"'hello': 'goodbye'");
 
-			eq(symbol.FinalTermPair(
+			eq(symbol.MapTerms(
 				{key: '123123', value: 'goodbye'}), 
 				"123123: 'goodbye'");
 
-			eq(symbol.FinalTermPair(
+			eq(symbol.MapTerms(
 				{key: '123123', value: false}), 
 				"123123: false");
 
-			eq(symbol.FinalTermPair(
+			eq(symbol.MapTerms(
 				{key: '123123', value: 'false'}), 
 				"123123: 'false'");
 		});
@@ -118,8 +112,9 @@ describe('symbols', function()
 	{
 		it('should accept an object', function()
 		{
-			eq(symbol.MapLiteral({key: 3, value: 4}, {key: 'hello', value: 'goodbye'}),
-					"{3: 4, 'hello': 'goodbye'}");
+			eq(symbol.MapLiteral([{key: 3, value: 4}, {key: 'hello', value: 'goodbye'}]), "{3: 4, 'hello': 'goodbye'}");
+
+			eq(symbol.CollectionLiteral([{key: 3, value: 4}, {key: 'hello', value: 'goodbye'}]), "{3: 4, 'hello': 'goodbye'}");
 		});
 	});
 
@@ -128,6 +123,7 @@ describe('symbols', function()
 		it('should accept an array', function()
 		{
 			eq(symbol.ListLiteral([3, 4, 5, 6]), '[3, 4, 5, 6]');
+			eq(symbol.CollectionLiteral([3, 4, 5, 6]), '[3, 4, 5, 6]');
 		});
 	});
 
@@ -136,9 +132,9 @@ describe('symbols', function()
 		it('should accept an array', function()
 		{
 			var val = [3, 4, 5, 6];
-			val.__type = 'set';
 
 			eq(symbol.SetLiteral(val), '{3, 4, 5, 6}');
+			eq(symbol.CollectionLiteral({set: val}), '{3, 4, 5, 6}');
 		});
 	});
 
@@ -277,7 +273,7 @@ function test_q_literal_accept(op)
 	{
 		it('should accept string literal "?"', function()
 		{
-			eq(symbol[op]('?'), '?');
+			eq(symbol[op]({variable: '?'}), '?');
 		});
 	};
 }
