@@ -89,20 +89,24 @@ describe('statements', function()
 	{
 		eq(query.AlterTable()
 			.table({table: 'addamsFamily'})
-			.instruction({column: "lastKnownLocation", type: "uuid"}),
+			.instruction({alter: "lastKnownLocation", type: "uuid"}),
 		"ALTER TABLE \"addamsFamily\" ALTER \"lastKnownLocation\" TYPE uuid;");
 
 		eq(query.AlterTable()
 			.table({table: 'addamsFamily'})
-			.instructionAlterInstructionAdd({column: "gravesite", type: "varchar"}),
+			.instruction({add: "gravesite", type: "varchar"}),
 		"ALTER TABLE \"addamsFamily\" ADD \"gravesite\" varchar;");
 
 		eq(query.AlterTable()
 			.table({table: 'addamsFamily'})
-			.instructionAlterInstructionWith().options()
-				.value({key: 'comment', value: "A most excellent and useful column family"})
-				.value({key: 'read_repair_chance', value: '0.2'})
-			.end().end(),
+			.instruction(
+            {
+                options:
+                [
+                    {key: 'comment', value: "A most excellent and useful column family"},
+                    {key: 'read_repair_chance', value: '0.2'}
+                ]
+            }),
 		"ALTER TABLE \"addamsFamily\" WITH \"comment\" = 'A most excellent and useful column family' AND \"read_repair_chance\" = 0.2;");
 	});
 
