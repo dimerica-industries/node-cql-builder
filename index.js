@@ -1,7 +1,6 @@
 var builder = require('./lib/builder'),
-	statements = require('./lib/statements');
+    statements = require('./lib/statements');
 
-for (var i in statements)
-{
-	exports[i] = builder.builderFromType(statements[i]);
+for (var i in statements) {
+    exports[i] = builder.builderFromType(statements[i]);
 }
