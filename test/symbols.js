@@ -64,6 +64,19 @@ describe('symbols:', function() {
         reject('term', 'null', 'undefined', 'object');
     });
 
+    describe('function-term', function() {
+        it ('should format correctly', function() {
+            eq(symbol.FunctionTerm({
+                fn: 'now',
+            }), 'now()');
+
+            eq(symbol.FunctionTerm({
+                fn: 'unixTimestamp',
+                args: '123'
+            }), 'unixTimestamp(123)');
+        });
+    });
+
     describe('int-term', function() {
         test_int_accept('IntTerm')();
         test_q_literal_accept('IntTerm')();

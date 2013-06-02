@@ -215,5 +215,13 @@ describe('statements', function() {
                 {tokenColumn: 'userid', relation: '<', value: 'bob'}
             ),
         "SELECT * FROM \"posts\" WHERE TOKEN(\"userid\") > TOKEN('tom') AND TOKEN(\"userid\") < 'bob';");
+
+        eq(query.Select()
+            .table({table: 'myTable'})
+            .clause("*")
+            .where(
+                {column: 't', relation: '=', value: {fn: 'now'}}
+            ),
+        "SELECT * FROM \"myTable\" WHERE \"t\" = now();");
     });
 });
