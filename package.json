@@ -1,6 +1,6 @@
 {
   "name": "cql-builder",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "CQL query builder",
   "main": "index.js",
   "directories": {
